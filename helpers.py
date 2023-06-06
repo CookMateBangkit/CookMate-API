@@ -23,16 +23,16 @@ def predict(image: Image.Image):
     image = image / 127.5 - 1.0
     
     class_probabilities = model.predict(image) 
-    
-    response = []
+
     class_names = ['ayam', 'brokoli', 'jagung', 'kacang_tanah', 'kangkung', 'kentang', 'labu', 'labu_siam', 'lobak_merah', 'mentimun', 'nanas', 'nangka', 'nasi_putih', 'paprika', 'pare', 'pepaya', 'pisang', 'singkong', 'tahu', 'telur', 'tempe', 'terong', 'tomat', 'ubi', 'wortel']
-    for (label, p) in zip(class_names, class_probabilities[0]):
-        resp = {}
-        resp["class"] = str(label)
-        resp["confidence"] = f"{p:.4f}%"
-        response.append(resp)
+    predicted_classes_index = np.argmax(class_probabilities)
+    predicted = class_names[predicted_classes_index]
+
+    result = {
+      "predicted": predicted
+    }
         
-    return response
+    return result
     
 def read_imagefile(file) -> Image.Image:
   image = Image.open(BytesIO(file))
