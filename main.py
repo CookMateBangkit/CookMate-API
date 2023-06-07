@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.responses import JSONResponse
 import uvicorn
 
 from helpers import predict, read_imagefile
@@ -16,8 +17,8 @@ async def predict_api(file: UploadFile = File(...)):
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict(image)
-    
-    return prediction
+    headers = {"Content-Type" : "undefined"}
+    return JSONResponse(content=prediction, headers=headers)
 
 if __name__ == "__main__":
     uvicorn.run(app, debug=True)
