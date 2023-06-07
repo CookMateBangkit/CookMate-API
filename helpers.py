@@ -2,7 +2,6 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from io import BytesIO
-from tensorflow.keras.utils import img_to_array
 
 model = None
 
