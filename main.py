@@ -1,9 +1,8 @@
 from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import JSONResponse
 import uvicorn
-import requests
 
-from helpers import predict_image, read_imagefile
+from classifier_helpers import predict_image, read_imagefile
+from recipe_helpers import get_recommendation, get_all_recipes, get_detail_recipe
 
 app = FastAPI(title='CookMate!')
 
@@ -11,18 +10,30 @@ app = FastAPI(title='CookMate!')
 async def read_root():
     return {"Hello": "World"}
 
-@app.post("/api/predict", status_code=200)
+@app.post("/predict", status_code=200)
 async def predict_api(file: UploadFile = File(...)):
     extension = file.filename.split(".")[-1] in ("jpg","jpeg","png")
     if not extension:
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
-    predict_image(image)
+    prediction = predict_image(image)
+    recommendation_result = get_recommendation(prediction)
     
-    url = "https://backend-g7swsp3jxa-as.a.run.app/resep"
-    recipes = requests.get(url)
+    return {"data": recommendation_result}
+
+@app.get("/recipe", status_code=200)
+async def all_recipe():
     
-    return {"data": recipes.json()}
+    recipes = get_all_recipes()
+    
+    return {"data": recipes}
+
+@app.get("/recipe/{id}", status_code=200)
+async def detail_recipe(id: str):
+    
+    recipe = get_detail_recipe(id)
+    
+    return {"data": recipe}
 
 if __name__ == "__main__":
     uvicorn.run(app, debug=True)

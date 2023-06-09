@@ -23,12 +23,8 @@ def predict_image(image: Image.Image):
   class_names = ['ayam', 'brokoli', 'jagung', 'kacang_tanah', 'kangkung', 'kentang', 'labu', 'labu_siam', 'lobak_merah', 'mentimun', 'nanas', 'nangka', 'nasi_putih', 'paprika', 'pare', 'pepaya', 'pisang', 'singkong', 'tahu', 'telur', 'tempe', 'terong', 'tomat', 'ubi', 'wortel']
   predicted_classes_index = np.argmax(class_probabilities)
   predicted = class_names[predicted_classes_index]
-
-  result = {
-    "predicted": predicted
-  }
         
-  return result
+  return predicted
     
 def read_imagefile(file) -> Image.Image:
   image = Image.open(BytesIO(file))
