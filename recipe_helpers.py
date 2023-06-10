@@ -5,18 +5,11 @@ import re
 
 dataset_recipes = None
 dataset_ingredients = None
-stopwords = None
 
 def load_dataset():
   dataset_recipes = pd.read_excel('./dataset_recipes.xlsx')
   dataset_ingredients = pd.read_excel('./dataset_ingredients.xlsx')
   return dataset_recipes, dataset_ingredients 
-
-def load_stopwords():
-  with open("stopwords-indonesia.txt") as f:
-    stopwords = f.readlines()
-  stopwords = [x.strip() for x in stopwords]
-  return stopwords
 
 def custom_preprocessor(text):
     text = re.sub(r'[\\d\\W_]+', ' ', text)
@@ -26,12 +19,8 @@ def get_recommendation(keyword):
   
   global dataset_recipes
   global dataset_ingredients
-  global stopwords
   if dataset_recipes is None or dataset_ingredients is None: 
     dataset_recipes, dataset_ingredients = load_dataset()
-    
-  if stopwords is None:
-    stopwords = load_stopwords()
     
   vectorizer = TfidfVectorizer(preprocessor=custom_preprocessor)
   recipe_matrix = vectorizer.fit_transform(dataset_recipes['ingredients'])
