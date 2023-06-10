@@ -22,7 +22,7 @@ def get_recommendation(keyword):
   similarity_scores = cosine_similarity(query_vector, recipe_matrix)
   
   top_recipe_indices = similarity_scores.argsort()[0][::-1]
-  top_10_recipes = dataset.iloc[top_recipe_indices][:3]
+  top_10_recipes = dataset.iloc[top_recipe_indices][:10]
   recipes = top_10_recipes.reset_index().to_dict(orient='index')
   
   recipes_cleaned = list(recipes.values())
