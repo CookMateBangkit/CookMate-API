@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Request
 import uvicorn
 
 from classifier_helpers import predict_image, read_imagefile
@@ -32,23 +32,23 @@ async def all_ingredients():
     return {"data": ingredients}
 
 @app.post("/predict", status_code=200)
-async def predict_api(file: UploadFile = File(...)):
+async def predict_img(file: UploadFile = File(...)):
     extension = file.filename.split(".")[-1] in ("jpg","jpeg","png")
     if not extension:
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict_image(image)
-    recommendation_result = get_recommendation(prediction)
+    recommendation_result = get_recommendation([prediction])
     
     return {"data": recommendation_result}
 
-@app.post("/predict-text", status_code=200)
-async def predict_text(text: str):
+@app.post("/recommend", status_code=200)
+async def predict_text(request: Request):
+    request_body = await request.json()
     
-    # jadikan sebuah list
-    # text = list
+    ingredients_list = request_body['ingredients'].split(",")
     
-    recommendation_result = get_recommendation(text)
+    recommendation_result = get_recommendation(ingredients_list)
     
     return {"data": recommendation_result}
 

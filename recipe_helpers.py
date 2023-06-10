@@ -1,26 +1,45 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import re
 
 dataset_recipes = None
 dataset_ingredients = None
+stopwords = None
 
 def load_dataset():
   dataset_recipes = pd.read_excel('./dataset_recipes.xlsx')
   dataset_ingredients = pd.read_excel('./dataset_ingredients.xlsx')
-  return dataset_recipes, dataset_ingredients
+  return dataset_recipes, dataset_ingredients 
+
+def load_stopwords():
+  with open("stopwords-indonesia.txt") as f:
+    stopwords = f.readlines()
+  stopwords = [x.strip() for x in stopwords]
+  return stopwords
+
+def custom_preprocessor(text):
+    text = re.sub(r'[\\d\\W_]+', ' ', text)
+    return text
 
 def get_recommendation(keyword):
   
   global dataset_recipes
   global dataset_ingredients
+  global stopwords
   if dataset_recipes is None or dataset_ingredients is None: 
     dataset_recipes, dataset_ingredients = load_dataset()
     
-  vectorizer = TfidfVectorizer()
-  recipe_matrix = vectorizer.fit_transform(dataset_recipes['main_ingredient'])
+  if stopwords is None:
+    stopwords = load_stopwords()
+    
+  vectorizer = TfidfVectorizer(preprocessor=custom_preprocessor)
+  recipe_matrix = vectorizer.fit_transform(dataset_recipes['ingredients'])
   
-  query_vector = vectorizer.transform([keyword])
+  if (len(keyword) > 1):
+    keyword = [' '.join(keyword)]
+  
+  query_vector = vectorizer.transform(keyword)
   similarity_scores = cosine_similarity(query_vector, recipe_matrix)
   
   top_recipe_indices = similarity_scores.argsort()[0][::-1]
@@ -31,7 +50,6 @@ def get_recommendation(keyword):
   
   for dictionary in recipes_cleaned:
     del dictionary['index']
-    del dictionary['main_ingredient']
   
   return recipes_cleaned
 
@@ -62,7 +80,6 @@ def get_all_recipes():
   
   for dictionary in recipes:
     del dictionary['index']
-    del dictionary['main_ingredient']
     
   return recipes
     
