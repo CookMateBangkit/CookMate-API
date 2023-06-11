@@ -84,3 +84,34 @@ def get_detail_recipe(id):
     
   return recipe
     
+def get_specific_recipe(name):
+  
+  global dataset_recipes
+  global dataset_ingredients
+  if dataset_recipes is None or dataset_ingredients is None: 
+    dataset_recipes, dataset_ingredients = load_dataset()
+    
+  recipes = dataset_recipes[dataset_recipes['name'].str.contains(name, case=False)]
+  recipes = recipes.reset_index().to_dict(orient='index')
+  recipes = list(recipes.values())
+  
+  for dictionary in recipes:
+    del dictionary['index']
+    
+  return recipes
+    
+def get_specific_ingredient(name):
+  
+  global dataset_recipes
+  global dataset_ingredients
+  if dataset_recipes is None or dataset_ingredients is None: 
+    dataset_recipes, dataset_ingredients = load_dataset()
+    
+  ingredients = dataset_ingredients[dataset_ingredients['name'].str.contains(name, case=False)]
+  ingredients = ingredients.reset_index().to_dict(orient='index')
+  ingredients = list(ingredients.values())
+  
+  for dictionary in ingredients:
+    del dictionary['index']
+  
+  return ingredients
