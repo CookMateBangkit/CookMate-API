@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile, File, Request
 import uvicorn
 
 from classifier_helpers import predict_image, read_imagefile
-from recipe_helpers import get_recommendation, get_all_recipes, get_detail_recipe, get_all_ingredients, get_specific_ingredient, get_specific_recipe
+from recipe_helpers import get_recommendation, get_all_recipes, get_detail_recipe, get_all_ingredients, get_specific_ingredients, get_specific_recipes
 
 app = FastAPI(title='CookMate!')
 
@@ -11,9 +11,9 @@ async def read_root():
     return {"Hello": "World"}
 
 @app.get("/recipes", status_code=200)
-async def recipe(name: str | None = None):
+async def recipes(name: str | None = None):
     if name:
-        recipes = get_specific_recipe(name)
+        recipes = get_specific_recipes(name)
     else:
         recipes = get_all_recipes()
     
@@ -29,7 +29,7 @@ async def detail_recipe(id: str):
 @app.get("/ingredients", status_code=200)
 async def ingredients(name: str | None = None):
     if name:
-        ingredients = get_specific_ingredient(name)
+        ingredients = get_specific_ingredients(name)
     else:
         ingredients = get_all_ingredients()
     

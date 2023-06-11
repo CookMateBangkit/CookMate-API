@@ -84,7 +84,7 @@ def get_detail_recipe(id):
     
   return recipe
     
-def get_specific_recipe(name):
+def get_specific_recipes(name):
   
   global dataset_recipes
   global dataset_ingredients
@@ -100,7 +100,7 @@ def get_specific_recipe(name):
     
   return recipes
     
-def get_specific_ingredient(name):
+def get_specific_ingredients(name):
   
   global dataset_recipes
   global dataset_ingredients
