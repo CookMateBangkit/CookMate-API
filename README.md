@@ -1,2 +1,2 @@
-# Fast-API
-FastAPI for image classifier model
+# CookMate API
+## How to clone this project?
