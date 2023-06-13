@@ -1,7 +1,5 @@
-# CookMate API
-## How to clone this project?
-# CookMate 
-## CookMate API
+# CookMate-API
+
 
 ## Link Website
 https://cookmate-sm5m2qi7wa-as.a.run.app/
