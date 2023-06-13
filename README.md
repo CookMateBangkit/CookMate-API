@@ -14,10 +14,10 @@ https://cookmate-sm5m2qi7wa-as.a.run.app/
 Cookmate-API is an Application Programming Interface (API) that provides services for the Cookmate application. 
 the following are the services provided by Cookmate-API: 
 
-  1. Sending pictures of ingredients to find food recipes
-  2. send a list of ingredients to find food recipes
-  3. search for food recipes 
-  4. displaying food ingredients
+  1. Send pictures of ingredients to find food recipes
+  2. Send a list of ingredients to find food recipes
+  3. Search for food recipes 
+  4. Displaying food ingredients
 
 ## Installation Requirements
   1. Python : https://www.python.org/downloads/
@@ -46,7 +46,7 @@ the following are the services provided by Cookmate-API:
   2. Make sure you have downloaded or cloned the Cookmate-API repository
   3. Also make sure you have downloaded the ML and taro models in one Cookmate-API repository
   4. Open CLI and direct to this repository
-  5. run the command `docker build -t Cookmate-api:v1`
+  5. Run the command `docker build -t Cookmate-api:v1`
   6. Wait for the docker build to complete
   7. Next run the command `docker run -d -p 8050:8050 --name Cookmate-API Cookmate-API:v1`
   8. this is how to run locally when you don't want to install python on a local computer 
