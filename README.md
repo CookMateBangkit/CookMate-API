@@ -22,7 +22,7 @@ the following are the services provided by Cookmate-API:
 ## Installation Requirements
   1. Python : https://www.python.org/downloads/
   2. Account Google Cloud Platform https://console.cloud.google.com/
-  3. Docker Desktop https://www.docker.com/ (if you don't want to install all ptyhon dependencies)
+  3. Docker Desktop https://www.docker.com/ (if you don't want to install all python dependencies)
 
 ## How to use
 ### The first thing you do
