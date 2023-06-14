@@ -33,7 +33,7 @@ the following are the services provided by Cookmate-API:
 
 ### On local computer
   1. Make sure you have downloaded the Cookmate-API repository
-  2. Make sure you have also downloaded the ML model and taro one Cookmate-API repository
+  2. Make sure you have also downloaded the ML model and saved it in the Cookmate-API repository.
   3. Make sure you have also downloaded python and the required dependencies in requirements.txt
   4. Open CLI and direct to this repository
   5. Run the command `uvicorn --host 0.0.0.0 --port 8050 main:app`
@@ -44,12 +44,12 @@ the following are the services provided by Cookmate-API:
 ### With Docker
   1. Make sure you have installed Docker Desktop on your local computer. 
   2. Make sure you have downloaded or cloned the Cookmate-API repository
-  3. Also make sure you have downloaded the ML and taro models in one Cookmate-API repository
+  3. Also make sure you have downloaded the ML model and saved it in one Cookmate-API repository.
   4. Open CLI and direct to this repository
   5. Run the command `docker build -t Cookmate-api:v1`
   6. Wait for the docker build to complete
   7. Next run the command `docker run -d -p 8050:8050 --name Cookmate-API Cookmate-API:v1`
-  8. this is how to run locally when you don't want to install python on a local computer 
+  8. now the API runs on `http://localhost:8050/` and `http://0.0.0.0:8050/` 
 
 ### With GCP
 
