@@ -52,6 +52,12 @@ the following are the services provided by Cookmate-API:
   8. now the API runs on `http://localhost:8050/` and `http://0.0.0.0:8050/` 
 
 ### With GCP
+  1. Open the cloud shell, then clone the CookMate-API repository
+  2. Input the machine learning model into the repository
+  3. Make sure you have given the cloud run admin role in the service account
+  4. Pass iam-policy to project id `gcloud projects get-iam-policy <your project id>`
+  5. Make sure the Service account Cloud run account permissions in Cloud Build are enabled
+  6. Run the command `gcloud builds submit .`
 
 ## Author
 + Mohammad Faraditya Eka Putra
