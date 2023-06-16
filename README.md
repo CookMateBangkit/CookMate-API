@@ -14,10 +14,15 @@ https://cookmate-sm5m2qi7wa-as.a.run.app/
 Cookmate-API is an Application Programming Interface (API) that provides services for the Cookmate application. 
 the following are the services provided by Cookmate-API: 
 
-  1. Send pictures of ingredients to find food recipes
-  2. Send a list of ingredients to find food recipes
-  3. Search for food recipes 
-  4. Displaying food ingredients
+  1. Get All Recipes
+  2. Get All Ingredients
+  3. Get Detail Recipe
+  4. Search Recipe
+  5. Search Ingredient
+  6. Recommendation Based on Text
+  7. Recommendation Based on Image
+ 
+ for more details here : https://cookmate-sm5m2qi7wa-as.a.run.app/api-doc 
 
 ## Installation Requirements
   1. Python : https://www.python.org/downloads/
